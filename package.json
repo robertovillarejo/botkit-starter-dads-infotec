@@ -1,0 +1,40 @@
+{
+  "name": "botkit-starter-dads-infotec",
+  "version": "1.0.0",
+  "description": "A starting point for building custom multi-messaging platforms and multi-nlp services chatbot applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertovillarejo/botkit-starter-dads-infotec.git"
+  },
+  "keywords": [
+    "botkit",
+    "starter",
+    "dialogflow",
+    "slack",
+    "facebook"
+  ],
+  "author": "Roberto Villarejo Martínez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robertovillarejo/botkit-starter-dads-infotec/issues"
+  },
+  "homepage": "https://github.com/robertovillarejo/botkit-starter-dads-infotec#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "botkit": "^0.6.7",
+    "botkit-middleware-dialogflow": "^1.1.0",
+    "botkit-storage-mongo": "^1.0.7",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "dialogflow-to-slack-middleware": "git+https://github.com/robertovillarejo/dialogflow-to-slack-middleware.git",
+    "express": "^4.16.2",
+    "express-hbs": "^1.0.4",
+    "node-env-file": "^0.1.8",
+    "querystring": "^0.2.0",
+    "request": "^2.83.0"
+  }
+}
