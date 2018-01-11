@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/robertovillarejo/botkit-starter-dads-infotec#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "botkit": "^0.6.7",
     "botkit-middleware-dialogflow": "^1.1.0",
     "botkit-storage-mongo": "^1.0.7",
@@ -31,6 +32,7 @@
     "dialogflow-to-facebook-middleware": "git+https://github.com/robertovillarejo/dialogflow-to-facebook-middleware.git",
     "dialogflow-to-slack-middleware": "git+https://github.com/robertovillarejo/dialogflow-to-slack-middleware.git",
     "express": "^4.16.2",
+    "http": "0.0.0",
     "node-env-file": "^0.1.8"
   }
 }
