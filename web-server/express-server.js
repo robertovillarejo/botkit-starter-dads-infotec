@@ -13,6 +13,9 @@ module.exports = function(options) {
     server.use(bodyParser.urlencoded({ extended: true }));  //parse url encoded
     
     server.set('port', options.port);
+
+    //Configure routes
+    require('./routes')(server);
     
     http.listen(server.get('port'), function () {
         console.log('listening on port ' + server.get('port'));

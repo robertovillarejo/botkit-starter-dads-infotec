@@ -22,7 +22,7 @@ var dialogflowMiddleware = require('./node_modules/botkit-middleware-dialogflow'
     token: process.env.DIALOGFLOW,
 });
 
-var webserver = require('./express-server')({
+var webserver = require('./web-server/express-server')({
     port: process.env.PORT || 3000
 });
 
