@@ -2,9 +2,20 @@
 Facebook bot
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 var Botkit = require('botkit');
-var dialogflowToFbMiddleware = require('../node_modules/dialogflow-to-facebook-middleware')({});
 
 module.exports = function (options) {
+
+    if (!options.access_token) {
+        throw new Error('FacebookBot: access_token not provided!');
+    }
+
+    if (!options.verify_token) {
+        throw new Error("FacebookBot: verify_token not provided!");
+    }
+
+    if (!options.webserver) {
+        throw new Error('FacebookBot: A web server is required for Facebook webhook');
+    }
 
     //Create controller
     var controller = Botkit.facebookbot({
@@ -13,14 +24,8 @@ module.exports = function (options) {
         port: options.webserver.get('port')
     });
 
-    //Import skills
-    var normalizedPath = require("path").join(__dirname, "skills");
-    require("fs").readdirSync(normalizedPath).forEach(function (file) {
-        require("./skills/" + file)(controller);
-    });
-
     //Create bot
-    var bot = controller.spawn({});
+    var bot = controller.spawn({});   
 
     //Assign web server to controller
     controller.webserver = options.webserver;
@@ -30,12 +35,10 @@ module.exports = function (options) {
         console.log('Facebook chatbot is online!!');
     });
 
-    if (options.dialogflowMiddleware !== undefined) {
-        //This middleware will send every message to dialogflow
-        controller.middleware.receive.use(options.dialogflowMiddleware.receive);
-    }
+    //Use middlewares
+    require('./middlewares')(controller);
 
-    //This will convert every response defined in dialogflow to Facebook format
-    //If dialogflowMiddleware was not previously executed, simply will do nothing
-    controller.middleware.receive.use(dialogflowToFbMiddleware.receive);
+    //Import skills
+    require('./skills')(controller); 
+
 };
