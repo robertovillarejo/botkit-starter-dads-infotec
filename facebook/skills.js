@@ -1,4 +1,8 @@
+var debug = require('debug')('starter:facebook-bot:skills');
+
 module.exports = function (controller) {
+
+    debug('Loading skills...');
 
     //Reply every message_received with fbResponse 
     //produced by dialogflow-to-facebook-middleware

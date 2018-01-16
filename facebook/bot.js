@@ -1,7 +1,5 @@
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Facebook bot
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 var Botkit = require('botkit');
+var debug = require('debug')('starter:facebook-bot');
 
 module.exports = function (options) {
 
@@ -18,6 +16,7 @@ module.exports = function (options) {
     }
 
     //Create controller
+    debug('Creating controller...');
     var controller = Botkit.facebookbot({
         access_token: options.access_token,
         verify_token: options.verify_token,
@@ -25,12 +24,14 @@ module.exports = function (options) {
     });
 
     //Create bot
+    debug('Creating bot...');
     var bot = controller.spawn({});   
 
     //Assign web server to controller
     controller.webserver = options.webserver;
 
     //Create webhook endpoint
+    debug('Creating webhook endpoint');
     controller.createWebhookEndpoints(controller.webserver, bot, function () {
         console.log('Facebook chatbot is online!!');
     });
