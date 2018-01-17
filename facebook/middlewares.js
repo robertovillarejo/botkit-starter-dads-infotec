@@ -1,6 +1,5 @@
 var dialogflowToFbMiddleware = require('dialogflow-to-facebook-middleware')({});
 var debug = require('debug')('starter:facebook-bot-middlewares');
-var toSchema = require('../fulfillment/toSchema');
 
 //Middlewares are executed in the order they appear
 module.exports = function (controller) {
@@ -28,22 +27,8 @@ module.exports = function (controller) {
 
     //Every intent annotated with an 'action' will
     //be sent as Webhook
-    var webHooks = require('../fulfillment/webhooks');
-    controller.middleware.receive.use(function (bot, message, next) {
-        if (message.nlpResponse && message.nlpResponse.result.action) {
-            //Do the webhooks
-            webHooks.trigger(
-                'fulfillment', toSchema(message)
-            );
-            webHooks.getEmitter().on('fulfillment.success', function (shortname, statusCode, body) {
-                console.log('Success on trigger webHook' + shortname + 'with status code', statusCode, 'and body', body);
-            });
-            webHooks.getEmitter().on('fulfillment.failure', function (shortname, statusCode, body) {
-                console.log('Error on trigger webHook' + shortname + 'with status code', statusCode, 'and body', body);
-            });
-        }
-        next();
-    });
+    var webHooks = require('../fulfillment/webhook-fulfillment-middleware')();
+    controller.middleware.receive.use(webHooks.receive);
 
     //Every Facebook reply defined in DialogFlow 
     //ready to send to Facebook
