@@ -1,4 +1,4 @@
-var debug = require('debug')('starter:facebook-bot:skills');
+var debug = require('debug')('STARTER:skills');
 
 module.exports = function (controller) {
 

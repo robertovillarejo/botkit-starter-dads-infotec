@@ -1,26 +1,35 @@
-var rp = require('request-promise');
-var toSchema = require('./toSchema');
-var debug = require('debug')('starter:facebook-bot-middlewares');
+var debug = require('debug')('STARTER:facebook-bot-middlewares');
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
+//Do synchronous POST request
 module.exports = function (config) {
+
+    if (!config.url) {
+        throw new Error('A url is required for webhook!');
+    }
+
+    var url = config.url;
+
     var middleware = {};
 
+    //Do the webhook if the intent has an action defined
     middleware.receive = function (bot, message, next) {
         if (message.nlpResponse && message.nlpResponse.result.action) {
-            var options = {
-                uri: 'http://localhost:8090/fulfillment',
-                json: true,
-                method: 'POST',
-                body: toSchema(message)
-            };
-
-            timeout(rp(options), 5000)
-                .then(function () {
-                    debug('Success on webhook');
-                })
-                .catch(function (err) {
-                    debug('Fail on webhook');
-                });
+            //TODO: validate message.nlpResponse against json schema
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url, false);
+            xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+            xhr.setRequestHeader('accept', 'application/json; charset=utf-8');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    debug('Webhook succesful to ' + url);
+                    if (xhr.responseText && typeof xhr.responseText === 'string') {
+                        var response = JSON.parse(xhr.responseText);
+                        processResponse(response, message);
+                    }
+                }
+            }
+            xhr.send(JSON.stringify(message.nlpResponse));
         }
         next();
     };
@@ -28,13 +37,18 @@ module.exports = function (config) {
     return middleware;
 }
 
-function wait(milliseconds) {
-    return new Promise(resolve => setTimeout(resolve, milliseconds));
-}
+function processResponse(response, message) {
 
-function timeout(promise, milliseconds) {
-    return Promise.race(
-        [promise, wait(milliseconds).then(() => {
-            throw new Error("Timeout after " + milliseconds + " ms");
-        })]);
+    if (!response) return;
+
+    //TODO: validate response against json schema
+    var result = message.nlpResponse.result;
+    result.fulfillment.speech = response.speech || result.fulfillment.speech;
+    result.fulfillment.messages = response.messages || result.fulfillment.messages;
+    result.parameters = Object.assign(result.parameters, response.data);
+    result.source = response.source || "fulfillment-system";
+
+    debug('Parsed response from webhook:');
+    debug(message.nlpResponse);
+    return;
 }

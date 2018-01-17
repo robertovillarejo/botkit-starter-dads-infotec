@@ -1,13 +1,15 @@
 var env = require('node-env-file');
-var debug = require('debug')('starter:main');
+var debug = require('debug')('STARTER:main');
 
 env(__dirname + '/.env');
 
+debug('Initializing web server...');
 //Init web server
 var webserver = require('./web-server/express-server')({
     port: process.env.PORT || 3000
 });
 
+debug('Initializing Facebook bot...');
 //Init facebook bot
 require('./facebook/bot')({
     access_token: process.env.ACCESS_TOKEN,

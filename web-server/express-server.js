@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var debug = require('debug')('starter:express-server');
+var debug = require('debug')('STARTER:express-server');
 
 module.exports = function(options) {
 

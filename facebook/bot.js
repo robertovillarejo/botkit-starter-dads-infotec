@@ -1,5 +1,5 @@
 var Botkit = require('botkit');
-var debug = require('debug')('starter:facebook-bot');
+var debug = require('debug')('STARTER:facebook-bot');
 
 module.exports = function (options) {
 
@@ -33,7 +33,7 @@ module.exports = function (options) {
     //Create webhook endpoint
     debug('Creating webhook endpoint');
     controller.createWebhookEndpoints(controller.webserver, bot, function () {
-        console.log('Facebook chatbot is online!!');
+        debug('Facebook chatbot is online!!');
     });
 
     //Use middlewares

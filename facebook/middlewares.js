@@ -1,5 +1,5 @@
 var dialogflowToFbMiddleware = require('dialogflow-to-facebook-middleware')({});
-var debug = require('debug')('starter:facebook-bot-middlewares');
+var debug = require('debug')('STARTER:facebook-bot-middlewares');
 
 //Middlewares are executed in the order they appear
 module.exports = function (controller) {
@@ -12,7 +12,8 @@ module.exports = function (controller) {
 
     // Log every message received
     controller.middleware.receive.use(function (bot, message, next) {
-        console.log('RECEIVED: ', message);
+        debug('Message received')
+        debug(message);
         message.logged = true;
         next();
     });
@@ -27,7 +28,11 @@ module.exports = function (controller) {
 
     //Every intent annotated with an 'action' will
     //be sent as Webhook
-    var webHooks = require('../fulfillment/webhook-fulfillment-middleware')();
+    var webHooks = require('../fulfillment/webhook-fulfillment-middleware')(
+        {
+            url: 'http://localhost:8090/fulfillment'
+        }
+    );
     controller.middleware.receive.use(webHooks.receive);
 
     //Every Facebook reply defined in DialogFlow 
@@ -41,11 +46,9 @@ module.exports = function (controller) {
 
     // Log every message sent
     controller.middleware.send.use(function (bot, message, next) {
-        // log it
-        console.log('SENT: ', message);
-        // modify the message
+        debug('Message sent')
+        debug(message);
         message.logged = true;
-        // continue processing the message
         next();
     });
 }
