@@ -42,4 +42,7 @@ module.exports = function (options) {
     //Import skills
     require('./skills')(controller); 
 
+    //Menu
+    require('./menu')(controller);
+
 };

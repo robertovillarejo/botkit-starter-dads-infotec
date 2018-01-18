@@ -14,6 +14,7 @@ module.exports = function (config) {
 
     //Do the webhook if the intent has an action defined
     middleware.receive = function (bot, message, next) {
+        debug(message);
         if (message.nlpResponse && message.nlpResponse.result.action) {
             //TODO: validate message.nlpResponse against json schema
             var xhr = new XMLHttpRequest();
