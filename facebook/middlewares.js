@@ -21,7 +21,7 @@ module.exports = function (controller) {
     //Init NLP module (dialogflow)
     debug('Configuring dialogflow middleware');
     var dialogflowMiddleware = require('botkit-middleware-dialogflow')({
-        token: process.env.DIALOGFLOW
+        token: process.env.DIALOGFLOW_CLIENT_TOKEN
     });
     //Analyze with DialogFlow every message received
     controller.middleware.receive.use(dialogflowMiddleware.receive);
@@ -30,7 +30,7 @@ module.exports = function (controller) {
     //be sent as Webhook
     var webHooks = require('../fulfillment/webhook-fulfillment-middleware')(
         {
-            url: 'http://localhost:8090/fulfillment'
+            url: process.env.FULFILLMENT_ENDPOINT
         }
     );
     controller.middleware.receive.use(webHooks.receive);
