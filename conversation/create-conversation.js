@@ -10,7 +10,7 @@ env(envFile);
 
 if (!process.env.DIALOGFLOW_DEVELOPER_TOKEN) {
     debug('For creating a conversation in DialogFlow a developer token is required');
-    exit(1);
+    process.exit(1);
 }
 
 var DEVELOPER_TOKEN = process.env.DIALOGFLOW_DEVELOPER_TOKEN;
