@@ -1370,41 +1370,7 @@ var intents = [
                 "messages": [
                     {
                         "type": 0,
-                        "platform": "slack",
-                        "speech": [
-                            "Hola soy el bot de Infotec! Mi nombre es Alise\nMe puedes pedir cosas como :",
-                            "Hola! ¿cómo puedo ayudarte?"
-                        ]
-                    },
-                    {
-                        "type": 2,
-                        "platform": "slack",
-                        "title": "Opciones",
-                        "replies": [
-                            "Información general",
-                            "Cat. de Servicios",
-                            "Visitas guiadas",
-                            "Oferta laboral",
-                            "Oferta académica"
-                        ],
-                        "lang": "es"
-                    },
-                    {
-                        "type": 2,
-                        "platform": "facebook",
-                        "title": "Opciones",
-                        "replies": [
-                            "Información general",
-                            "Cat. de Servicios",
-                            "Visitas guiadas",
-                            "Oferta laboral",
-                            "Oferta académica"
-                        ],
-                        "lang": "es"
-                    },
-                    {
-                        "type": 0,
-                        "speech": "Hola! ¿En qué puedo ayudarte?"
+                        "speech": "!Hola :)!"
                     }
                 ],
                 "defaultResponsePlatforms": {
