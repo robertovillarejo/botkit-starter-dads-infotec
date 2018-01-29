@@ -23,7 +23,7 @@ For fulfillment support:
 - The credentials
 
 ## Usage
-Fill the `.env` file with the required variables.
+Fist, make sure you're done with all environment variables in your `.env` file.
 
 - **DIALOGFLOW_CLIENT_TOKEN**: The DialogFlow client token
 - **DIALOGFLOW_DEVELOPER_TOKEN**: The DialogFlow developer token (required if you want to use the `conversation-create` script)
@@ -34,11 +34,26 @@ Fill the `.env` file with the required variables.
 
 Once all variables defined, run `npm install` and dependencies will be downloaded.
 
-If you want to create a basic conversation for your DialogFlow agent, run `npm run conversation-create`.
-
 Finally, to run the project simply execute `npm start` or `node index.js`.
+
+# Creating Conversation
+
+If you want to create a basic conversation for your DialogFlow agent, run `npm run conversation-create` (currently supports only Spanish).
+After that, your chatbot will be able to recognize the following intents:
+- Tell a joke (cuéntame un chiste)
+- How are you? (¿cómo estás?)
+- Who are your creators? (¿quiénes son tus creadores?)
+- Welcome (¡Hola!)
+- Farewell (Nos vemos)
+- Thanks (Gracias)
+- Talk to a human (Hablar con un humano)
+- General information (Información general)
+- What is your name? (¿Cómo te llamas?)
+- What is your web page? (¿Cuál es su página web?)
+- Feedback (Eres de gran ayuda/No sirves para nada)
+- Location of the company (¿En dónde se ubican?)
 
 ## Chatting with the chatbot
 Once your project is running, make sure your ip is public. Then, in your Facebook App, add a webhook with that ip and the verify token you defined in the `.env` file.
 
-Go to your Facebook page and send a message to start the conversation. 
+Go to your Facebook page and send a message to start the conversation.
