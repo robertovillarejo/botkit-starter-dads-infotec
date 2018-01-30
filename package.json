@@ -34,6 +34,7 @@
     "dialogflow-facebook-to-web-middleware": "git+https://github.com/robertovillarejo/dialogflow-facebook-to-web-middleware.git",
     "dialogflow-to-facebook-middleware": "git+https://github.com/robertovillarejo/dialogflow-to-facebook-middleware.git",
     "express": "^4.16.2",
+    "helmet": "^3.10.0",
     "http": "0.0.0",
     "node-env-file": "^0.1.8",
     "xmlhttprequest": "^1.8.0"
