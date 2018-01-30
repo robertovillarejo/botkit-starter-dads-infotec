@@ -1,7 +1,7 @@
 var Botkit = require('botkit');
 var express = require('express');
 var http = require('http');
-var debug = require('debug')('STARTER:web-bot');
+var debug = require('debug')('STARTER:web-bot:main');
 
 module.exports = function (options) {
 

@@ -8,12 +8,11 @@ module.exports = function (controller) {
     //produced by dialogflow-to-facebook-middleware
     controller.on('message_received', function (bot, message) {
         if (message.webMessages) {
-            //bot.startConversation(message, function (err, convo) {
+            bot.startConversation(message, function (err, convo) {
                 message.webMessages.forEach(element => {
-                    //convo.say(element);
-                    bot.reply(message, element);
+                    convo.say(element);
                 });
-            //});
+            });
         }
     });
 }

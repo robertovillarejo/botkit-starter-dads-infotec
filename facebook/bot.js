@@ -1,5 +1,5 @@
 var Botkit = require('botkit');
-var debug = require('debug')('STARTER:facebook-bot');
+var debug = require('debug')('STARTER:facebook-bot:main');
 
 module.exports = function (options) {
 

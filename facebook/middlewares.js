@@ -1,5 +1,5 @@
 var dialogflowToFbMiddleware = require('dialogflow-to-facebook-middleware')({});
-var debug = require('debug')('STARTER:facebook-bot-middlewares');
+var debug = require('debug')('STARTER:facebook-bot:middlewares');
 
 //Middlewares are executed in the order they appear
 module.exports = function (controller) {

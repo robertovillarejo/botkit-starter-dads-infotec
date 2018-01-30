@@ -1,4 +1,4 @@
-var debug = require('debug')('STARTER:facebook-bot-middlewares');
+var debug = require('debug')('STARTER:facebook-bot:fulfillment');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 //Do synchronous POST request
