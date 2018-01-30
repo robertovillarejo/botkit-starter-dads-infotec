@@ -31,6 +31,7 @@
     "botkit-middleware-dialogflow": "^1.1.0",
     "botkit-storage-mongo": "^1.0.7",
     "debug": "^3.1.0",
+    "dialogflow-facebook-to-web-middleware": "git+https://github.com/robertovillarejo/dialogflow-facebook-to-web-middleware.git",
     "dialogflow-to-facebook-middleware": "git+https://github.com/robertovillarejo/dialogflow-to-facebook-middleware.git",
     "express": "^4.16.2",
     "http": "0.0.0",

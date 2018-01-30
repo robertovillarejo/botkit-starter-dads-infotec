@@ -7,6 +7,13 @@ module.exports = function (controller) {
     //Reply every message_received with fbResponse 
     //produced by dialogflow-to-facebook-middleware
     controller.on('message_received', function (bot, message) {
-        bot.reply(message, message.text);
+        if (message.webMessages) {
+            //bot.startConversation(message, function (err, convo) {
+                message.webMessages.forEach(element => {
+                    //convo.say(element);
+                    bot.reply(message, element);
+                });
+            //});
+        }
     });
 }
