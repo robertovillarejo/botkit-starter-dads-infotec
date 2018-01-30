@@ -4,7 +4,9 @@
   "description": "A starting point for building custom multi-messaging platforms and multi-nlp services chatbot applications",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=STARTER:* node index.js",
+    "start": "if-env NODE_ENV=production ?? npm run start:prod || npm run start:dev",
+    "start:dev": "DEBUG=STARTER:* nodenv -f .",
+    "start:prod": "node .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "conversation-create": "node conversation/create-conversation.js"
   },
@@ -36,7 +38,11 @@
     "express": "^4.16.2",
     "helmet": "^3.10.0",
     "http": "0.0.0",
+    "if-env": "^1.0.4",
     "node-env-file": "^0.1.8",
     "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "node-env-run": "^2.0.1"
   }
 }
