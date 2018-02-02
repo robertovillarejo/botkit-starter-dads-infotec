@@ -33,13 +33,12 @@
     "botkit-middleware-dialogflow": "^1.1.0",
     "botkit-storage-mongo": "^1.0.7",
     "debug": "^3.1.0",
-    "dialogflow-facebook-to-web-middleware": "git+https://github.com/robertovillarejo/dialogflow-facebook-to-web-middleware.git",
-    "dialogflow-to-facebook-middleware": "git+https://github.com/robertovillarejo/dialogflow-to-facebook-middleware.git",
     "express": "^4.16.2",
     "helmet": "^3.10.0",
     "http": "0.0.0",
     "if-env": "^1.0.4",
     "node-env-file": "^0.1.8",
+    "replies-converter-botkit-middlewares": "git+https://github.com/robertovillarejo/replies-converter-botkit-middlewares.git",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {

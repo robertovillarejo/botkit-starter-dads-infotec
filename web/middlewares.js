@@ -1,4 +1,4 @@
-var dialogflowFbToWebMiddleware = require('dialogflow-facebook-to-web-middleware')({});
+var webRepliesConverter = require('replies-converter-botkit-middlewares').web;
 var debug = require('debug')('STARTER:web-bot:middlewares');
 
 //Middlewares are executed in the order they appear
@@ -29,7 +29,7 @@ module.exports = function (controller) {
     //Every Facebook reply defined in DialogFlow 
     //ready to send to Facebook
     debug('Configuring dialogflow-facebook-to-web middleware');
-    controller.middleware.receive.use(dialogflowFbToWebMiddleware.receive);
+    controller.middleware.receive.use(webRepliesConverter.receive);
 
     /*
         SEND MIDDLEWARES
