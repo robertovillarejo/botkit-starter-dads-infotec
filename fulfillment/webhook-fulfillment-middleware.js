@@ -9,6 +9,7 @@ module.exports = function (config) {
     }
 
     var url = config.url;
+    var token = process.env.TOKEN_FULFILLMENT;
 
     var middleware = {};
 
@@ -21,7 +22,8 @@ module.exports = function (config) {
             xhr.open('POST', url, false);
             xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
             xhr.setRequestHeader('accept', 'application/json; charset=utf-8');
-            xhr.onload = function () {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            xhr.onload = () => {
                 if (xhr.status === 200) {
                     debug('Webhook succesful to ' + url);
                     if (xhr.responseText && typeof xhr.responseText === 'string') {
