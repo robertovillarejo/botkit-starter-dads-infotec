@@ -23,7 +23,7 @@ module.exports = function (options) {
     var server = http.createServer(webserver);
 
     server.listen(port, null, function () {
-        debug('Web chatbot socket server configured and listening at http://localhost:' + port);
+        debug('Web chatbot working at http://localhost:' + port + '/chat.html');
     });
 
     // Open the web socket server
