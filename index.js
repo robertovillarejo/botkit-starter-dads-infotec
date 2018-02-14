@@ -14,7 +14,7 @@ require('./facebook/bot')({
     webserver: webserver
 });
 
-debug('Initializing Facebook bot...');
+debug('Initializing Web bot...');
 require('./web/bot')({
     webserver: webserver
 });

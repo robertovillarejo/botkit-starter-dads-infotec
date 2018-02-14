@@ -4,9 +4,8 @@
   "description": "A starting point for building custom multi-messaging platforms and multi-nlp services chatbot applications",
   "main": "index.js",
   "scripts": {
-    "start": "if-env NODE_ENV=production ?? npm run start:prod || npm run start:dev",
-    "start:dev": "DEBUG=STARTER:* nodenv -f .",
-    "start:prod": "node .",
+    "start": "nf start",
+    "start:dev": "DEBUG=STARTER:* nf start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "conversation-create": "node conversation/create-conversation.js"
   },
@@ -34,6 +33,7 @@
     "botkit-storage-mongo": "^1.0.7",
     "debug": "^3.1.0",
     "express": "^4.16.2",
+    "foreman": "2.0.0",
     "helmet": "^3.10.0",
     "http": "0.0.0",
     "if-env": "^1.0.4",
