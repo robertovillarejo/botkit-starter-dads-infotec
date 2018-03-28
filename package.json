@@ -1,13 +1,10 @@
 {
   "name": "botkit-starter-dads-infotec",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A starting point for building custom multi-messaging platforms and multi-nlp services chatbot applications",
-  "main": "index.js",
   "scripts": {
-    "start": "nf start",
-    "start:dev": "DEBUG=STARTER:* nf start",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "conversation-create": "node conversation/create-conversation.js"
+    "start": "node ./bin/www",
+    "conversation-create": "node ./bots/conversation/create-conversation.js"
   },
   "repository": {
     "type": "git",
@@ -27,21 +24,18 @@
   },
   "homepage": "https://github.com/robertovillarejo/botkit-starter-dads-infotec#readme",
   "dependencies": {
-    "body-parser": "^1.18.2",
     "botkit": "^0.6.8",
     "botkit-middleware-dialogflow": "^1.1.0",
     "botkit-storage-mongo": "^1.0.7",
-    "debug": "^3.1.0",
-    "express": "^4.16.2",
-    "foreman": "2.0.0",
-    "helmet": "^3.10.0",
-    "http": "0.0.0",
-    "if-env": "^1.0.4",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "helmet": "3.12.0",
+    "http-errors": "~1.6.2",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.0",
     "node-env-file": "^0.1.8",
     "replies-converter-botkit-middlewares": "git+https://github.com/robertovillarejo/replies-converter-botkit-middlewares.git",
-    "xmlhttprequest": "^1.8.0"
-  },
-  "devDependencies": {
-    "node-env-run": "^2.0.1"
+    "xmlhttprequest": "1.8.0"
   }
 }
