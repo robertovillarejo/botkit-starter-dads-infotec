@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A starting point for building custom multi-messaging platforms and multi-nlp services chatbot applications",
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nf start",
     "conversation-create": "node ./bots/conversation/create-conversation.js"
   },
   "repository": {
@@ -30,6 +30,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "foreman": "2.0.0",
     "helmet": "3.12.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
