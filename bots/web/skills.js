@@ -16,14 +16,13 @@ module.exports = function (controller) {
         }
     });
 
-    controller.on('hello,welcome_back', (bot, message) => {
+    controller.on('hello', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
             if (!err) {
-                convo.say('Hello! I\'m a demo bot from your new project!');
-                convo.say('You should modify this project to get a real bot');
-                convo.say('I\'m living in a web environment for now but you can connect me to other platforms like Facebook');
+                convo.say('¡Hola! Soy un bot demo');
+                convo.say('Por ahora, solo vivo en un ambiente web pero me puedes conectar a otras plataformas como Facebook');
                 convo.say({
-                    text: 'I can send you images!',
+                    text: '¡Puedo enviarte imágenes!',
                     files: [
                         {
                             url: 'https://www.infotec.mx/work/models/infotec/design_2015/images/logo_infotec.png',
@@ -32,7 +31,7 @@ module.exports = function (controller) {
                     ]
                 });
                 convo.say({
-                    text: 'I can send you links!',
+                    text: '¡Puedo enviarte links!',
                     files: [
                         {
                             url: 'https://www.infotec.mx/'
@@ -40,15 +39,21 @@ module.exports = function (controller) {
                     ]
                 });
                 convo.say({
-                    text: 'I cand send you quick replies!',
+                    text: '¡Puedo enviarte botones!',
                     quick_replies: [
                         {
-                            title: 'Thanks!',
+                            title: '¡Gracias!',
                             payload: 'gracias'
                         }
                     ]
                 });
             }
+        })
+    });
+
+    controller.on('welcome_back', (bot, message) => {
+        bot.startConversation(message, (err, convo) => {
+            convo.say('Hola de nuevo :)');
         })
     });
 }

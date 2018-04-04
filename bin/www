@@ -6,7 +6,7 @@
 var app = require('../app');
 var debug = require('debug')('express-app:server');
 var http = require('http');
-var indexBot = require('../bots/index');
+var initBots = require('../bots/index');
 
 /**
  * Get port from environment and store in Express.
@@ -32,7 +32,7 @@ server.on('listening', onListening);
 /**
  * Call the index bot
  */
-indexBot(server, app);
+initBots(server, app);
 
 /**
  * Normalize a port into a number, string, or false.

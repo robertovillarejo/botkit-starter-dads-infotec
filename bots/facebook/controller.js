@@ -1,11 +1,10 @@
-var Botkit = require('botkit');
 var debug = require('debug')('STARTER:facebook-bot:main');
 
-module.exports = function (app) {
+module.exports = function (botkit, app) {
 
     //Create controller
     debug('Creating controller...');
-    var controller = Botkit.facebookbot({
+    var controller = botkit.facebookbot({
         access_token: process.env.ACCESS_TOKEN,
         verify_token: process.env.VERIFY_TOKEN,
         port: process.env.PORT

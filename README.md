@@ -2,7 +2,7 @@
 A starting point for building custom multi-messaging platforms and multi-nlp services chatbot applications
 
 ## Getting Started
-You'll need:
+You will need:
 - [NodeJS](https://nodejs.org/es/)
 
 For Facebook support:
@@ -36,7 +36,7 @@ Once all variables defined, run `npm install` and dependencies will be downloade
 
 Finally, to run the project simply execute `npm start` or `node index.js`.
 
-# Creating Conversation
+### Creating Conversation
 
 If you want to create a basic conversation for your DialogFlow agent, run `npm run conversation-create` (currently supports only Spanish).
 After that, your chatbot will be able to recognize the following intents:
@@ -53,7 +53,7 @@ After that, your chatbot will be able to recognize the following intents:
 - Feedback (Eres de gran ayuda/No sirves para nada)
 - Location of the company (¿En dónde se ubican?)
 
-## Chatting with the chatbot
+### Chatting with the chatbot
 Once your project is running, make sure your ip is public. Then, in your Facebook App, add a webhook with that ip and the verify token you defined in the `.env` file.
 
 Go to your Facebook page and send a message to start the conversation.

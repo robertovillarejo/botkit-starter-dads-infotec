@@ -1,4 +1,5 @@
 // Index for creating bots
+var botkit = require('botkit');
 var webController = require('./web/controller');
 var webMiddlewares = require('./web/middlewares');
 var webSkills = require('./web/skills');
@@ -9,21 +10,21 @@ var fbSkills = require('./facebook/skills');
 var fbMenu = require('./facebook/menu');
 
 //Creating web bot
-function createWebBot(server) {
-    var controller = webController(server);
+function createWebBot(botkit, server) {
+    var controller = webController(botkit, server);
     webMiddlewares(controller);
     webSkills(controller);
 }
 
 //Creating Facebook bot
-function createFbBot(app) {
-    var controller = fbController(app);
+function createFbBot(botkit, app) {
+    var controller = fbController(botkit, app);
     fbMiddlewares(controller);
     fbSkills(controller);
     fbMenu(controller);
 }
 
 module.exports = function (server, app) {
-    createWebBot(server);
-    createFbBot(app);
+    createWebBot(botkit, server);
+    createFbBot(botkit, app);
 }
