@@ -7,7 +7,7 @@ import * as helmet from 'helmet';
 import TYPES from './constant/types';
 import { UserService } from './service/user';
 import { MongoDBClient } from './utils/mongodb/client';
-import './controller/home';
+import './controller/fulfillment';
 import './controller/user';
 import * as express from "express";
 import * as botkit from "botkit";
