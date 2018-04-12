@@ -3,7 +3,8 @@ const TYPES = {
     UserService: Symbol.for('UserService'),
     WebController: Symbol.for('WebController'),
     FbController: Symbol.for('FacebookController'),
-    webServer: Symbol.for('WebServer')
+    webServer: Symbol.for('WebServer'),
+    ChuckNorrisJokeService: Symbol.for('ChuckNorrisJokeService')
 };
 
 export default TYPES;

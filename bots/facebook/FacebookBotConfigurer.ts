@@ -10,14 +10,10 @@ export class FacebookBotConfigurer {
 
     private _controller: FacebookController;
 
-    private _bot: FacebookBot;
-
-
     constructor(
         @inject(TYPES.FbController) fbController: FacebookController
     ) {
         this._controller = fbController;
-        this._bot = this._controller.spawn();
         configureMiddlewares(this._controller);
         configureSkills(this._controller);
     }

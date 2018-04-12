@@ -1,3 +1,5 @@
+import { ChuckNorrisJokeService } from './service/chuckNorrisJokeService';
+import { IJokeService } from './service/jokeService';
 import 'reflect-metadata';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import { Container } from 'inversify';
@@ -28,6 +30,7 @@ if (process.env.NODE_ENV === 'development') {
 //Binds services
 container.bind<MongoDBClient>(TYPES.MongoDBClient).to(MongoDBClient);
 container.bind<UserService>(TYPES.UserService).to(UserService);
+container.bind<IJokeService>(TYPES.ChuckNorrisJokeService).to(ChuckNorrisJokeService);
 
 //Binds and initialize a socketbot from botkit
 let webController = botkit.socketbot({ replyWithTyping: true });
