@@ -38,11 +38,13 @@ httpServer.listen(port);
 //container.bind<http.Server>(TYPES.httpServer).toConstantValue(httpServer);
 
 //Web controller
+container.get(TYPES.webBotConfigurer);
 let webController: WebController = container.get(TYPES.WebController);
 webController.openSocketServer(httpServer);
 webController.startTicking();
 
 //Facebook controller
+container.get(TYPES.fbBotConfigurer);
 let fbController: FacebookController = container.get(TYPES.FbController);
 const bot = fbController.spawn();
 fbController.createWebhookEndpoints(app, bot, () => {

@@ -1,3 +1,5 @@
+import { FacebookBotConfigurer } from './bots/facebook/FacebookBotConfigurer';
+import { WebBotConfigurer } from './bots/web/WebBotConfigurer';
 import 'reflect-metadata';
 import { Container } from 'inversify';
 import { makeLoggerMiddleware } from 'inversify-logger-middleware';
@@ -10,8 +12,6 @@ import { IJokeService } from './service/jokeService';
 import { WebController, FacebookController } from "botkit";
 import * as botkit from "botkit";
 
-
-// load everything needed to the Container
 let container = new Container();
 
 if (process.env.NODE_ENV === 'development') {
@@ -27,6 +27,7 @@ container.bind<IJokeService>(TYPES.ChuckNorrisJokeService).to(ChuckNorrisJokeSer
 //Binds and initialize a socketbot from botkit
 let webController = botkit.socketbot({ replyWithTyping: true });
 container.bind<WebController>(TYPES.WebController).toConstantValue(webController);
+container.bind(TYPES.webBotConfigurer).to(WebBotConfigurer);
 
 //Binds and initialize a facebook bot from botkit
 let fbController = botkit.facebookbot({
@@ -34,5 +35,6 @@ let fbController = botkit.facebookbot({
   verify_token: process.env.VERIFY_TOKEN
 });
 container.bind<FacebookController>(TYPES.FbController).toConstantValue(fbController);
+container.bind(TYPES.fbBotConfigurer).to(FacebookBotConfigurer);
 
 export default container;

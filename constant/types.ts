@@ -5,7 +5,9 @@ const TYPES = {
     FbController: Symbol.for('FacebookController'),
     webServer: Symbol.for('WebServer'),
     ChuckNorrisJokeService: Symbol.for('ChuckNorrisJokeService'),
-    httpServer: Symbol.for("httpServer")
+    httpServer: Symbol.for("httpServer"),
+    webBotConfigurer: Symbol.for("WebControllerConfigurer"),
+    fbBotConfigurer: Symbol.for("FacebookControllerConfigurer")
 };
 
 export default TYPES;
