@@ -1,6 +1,9 @@
 import { FacebookBotConfigurer } from './bots/facebook/FacebookBotConfigurer';
 import { WebBotConfigurer } from './bots/web/WebBotConfigurer';
 import 'reflect-metadata';
+import * as http from "http";
+import { InversifyExpressServer } from 'inversify-express-utils';
+import { configureApp } from './configureApp';
 import { Container } from 'inversify';
 import { makeLoggerMiddleware } from 'inversify-logger-middleware';
 import { UserService } from './service/user';
@@ -12,6 +15,15 @@ import { IJokeService } from './service/jokeService';
 import { WebController, FacebookController } from "botkit";
 import * as botkit from "botkit";
 
+//Controllers
+import './controller/fulfillment';
+import './controller/user';
+import './controller/home';
+import './bots/web/WebBotConfigurer';
+import './bots/facebook/FacebookBotConfigurer'
+
+const port = process.env.PORT;
+
 let container = new Container();
 
 if (process.env.NODE_ENV === 'development') {
@@ -19,17 +31,28 @@ if (process.env.NODE_ENV === 'development') {
   container.applyMiddleware(logger);
 }
 
-//Binds services
+//Services
 container.bind<MongoDBClient>(TYPES.MongoDBClient).to(MongoDBClient);
 container.bind<UserService>(TYPES.UserService).to(UserService);
 container.bind<IJokeService>(TYPES.ChuckNorrisJokeService).to(ChuckNorrisJokeService);
 
-//Binds and initialize a socketbot from botkit
+//Express app
+let server = new InversifyExpressServer(container);
+server.setConfig(configureApp);
+let app = server.build();
+//HTTP server
+const httpServer: http.Server = http.createServer(app);
+httpServer.listen(port);
+
+container.bind(TYPES.webServer).toConstantValue(app);
+container.bind<http.Server>(TYPES.httpServer).toConstantValue(httpServer);
+
+//SocketBot
 let webController = botkit.socketbot({ replyWithTyping: true });
 container.bind<WebController>(TYPES.WebController).toConstantValue(webController);
 container.bind(TYPES.webBotConfigurer).to(WebBotConfigurer);
 
-//Binds and initialize a facebook bot from botkit
+//FacebookBot
 let fbController = botkit.facebookbot({
   access_token: process.env.ACCESS_TOKEN,
   verify_token: process.env.VERIFY_TOKEN
