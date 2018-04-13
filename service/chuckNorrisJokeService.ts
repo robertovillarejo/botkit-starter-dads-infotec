@@ -46,10 +46,6 @@ export class ChuckNorrisJokeService implements IJokeService {
                         ],
                         "source": "fullfillment-system",
                         "followupEvent": {
-                            "name": "event-triggered",
-                            "parameters": {
-                                "value1": "valor1"
-                            }
                         }
                     });
                 })
