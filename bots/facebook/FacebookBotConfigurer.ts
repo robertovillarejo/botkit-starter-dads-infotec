@@ -1,7 +1,7 @@
 import { controller } from 'inversify-express-utils';
 import { inject } from 'inversify';
 import TYPES from '../../constant/types';
-import { FacebookController, FacebookBot } from 'botkit';
+import { FacebookController } from 'botkit';
 import { configureSkills } from './skills';
 import { configureMiddlewares } from './middlewares';
 

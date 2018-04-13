@@ -1,80 +1,55 @@
-import { ChuckNorrisJokeService } from './service/chuckNorrisJokeService';
-import { IJokeService } from './service/jokeService';
+import { WebController, FacebookController } from 'botkit';
 import 'reflect-metadata';
-import { InversifyExpressServer } from 'inversify-express-utils';
-import { Container } from 'inversify';
-import { makeLoggerMiddleware } from 'inversify-logger-middleware';
-import * as bodyParser from 'body-parser';
-import * as helmet from 'helmet';
+
+import container from "./installer";
+
+import * as http from "http";
+
 import TYPES from './constant/types';
-import { UserService } from './service/user';
-import { MongoDBClient } from './utils/mongodb/client';
+
+import { InversifyExpressServer } from 'inversify-express-utils';
+
+//Controllers
 import './controller/fulfillment';
 import './controller/user';
+import './controller/home';
 import './bots/web/WebBotConfigurer';
 import './bots/facebook/FacebookBotConfigurer'
-import * as express from "express";
-import * as botkit from "botkit";
-import * as http from "http";
-import * as path from "path";
-import { WebController, FacebookController } from "botkit";
 
-// load everything needed to the Container
-let container = new Container();
+import { configureApp } from './configureApp';
 
-if (process.env.NODE_ENV === 'development') {
-  let logger = makeLoggerMiddleware();
-  container.applyMiddleware(logger);
-}
-
-//Binds services
-container.bind<MongoDBClient>(TYPES.MongoDBClient).to(MongoDBClient);
-container.bind<UserService>(TYPES.UserService).to(UserService);
-container.bind<IJokeService>(TYPES.ChuckNorrisJokeService).to(ChuckNorrisJokeService);
-
-//Binds and initialize a socketbot from botkit
-let webController = botkit.socketbot({ replyWithTyping: true });
-container.bind<WebController>(TYPES.WebController).toConstantValue(webController);
-
-//Binds and initialize a facebook bot from botkit
-let fbController = botkit.facebookbot({
-  access_token: process.env.ACCESS_TOKEN,
-  verify_token: process.env.VERIFY_TOKEN
-});
-container.bind<FacebookController>(TYPES.FbController).toConstantValue(fbController);
+const ip = require('ip');
+const externalIp = ip.address();
+const port = process.env.PORT;
 
 //Configure the app
-const port = process.env.PORT;
 let server = new InversifyExpressServer(container);
-server.setConfig((app) => {
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }));
-  app.use(bodyParser.json());
-  app.use(helmet());
-  app.use(express.static(path.join(__dirname, 'public')));
-  app.set('port', port);
-});
+server.setConfig(configureApp);
 
 //Build the app
 let app = server.build();
 
-container.bind(TYPES.webServer).toConstantValue(app);
+//container.bind(TYPES.webServer).toConstantValue(app);
 
 //The http server
-const httpServer = http.createServer(app);
+const httpServer: http.Server = http.createServer(app);
 httpServer.listen(port);
 
+//container.bind<http.Server>(TYPES.httpServer).toConstantValue(httpServer);
+
 //Web controller
+let webController: WebController = container.get(TYPES.WebController);
 webController.openSocketServer(httpServer);
 webController.startTicking();
 
 //Facebook controller
+let fbController: FacebookController = container.get(TYPES.FbController);
 const bot = fbController.spawn();
 fbController.createWebhookEndpoints(app, bot, () => {
   console.log('Facebook bot online!');
 });
 
 console.log(`Server successfully started on http://localhost:${port}`);
+console.log(`Server successfully started on http://${externalIp}:${port}`);
 
 exports = module.exports = app;
