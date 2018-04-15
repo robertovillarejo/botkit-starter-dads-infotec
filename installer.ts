@@ -6,8 +6,6 @@ import { InversifyExpressServer } from 'inversify-express-utils';
 import { configureApp } from './configureApp';
 import { Container } from 'inversify';
 import { makeLoggerMiddleware } from 'inversify-logger-middleware';
-import { UserService } from './service/user';
-import { MongoDBClient } from './utils/mongodb/client';
 
 import TYPES from './constant/types';
 import { ChuckNorrisJokeService } from './service/chuckNorrisJokeService';
@@ -17,8 +15,6 @@ import * as botkit from "botkit";
 
 //Controllers
 import './controller/fulfillment';
-import './controller/user';
-import './controller/home';
 import './bots/web/WebBotConfigurer';
 import './bots/facebook/FacebookBotConfigurer'
 
@@ -32,8 +28,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 //Services
-container.bind<MongoDBClient>(TYPES.MongoDBClient).to(MongoDBClient);
-container.bind<UserService>(TYPES.UserService).to(UserService);
 container.bind<IJokeService>(TYPES.ChuckNorrisJokeService).to(ChuckNorrisJokeService);
 
 //Express app

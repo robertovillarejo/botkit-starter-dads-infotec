@@ -1,9 +1,10 @@
 import { WebController } from "botkit";
 import { inject, injectable } from "inversify";
 import TYPES from "../../constant/types";
-import { configureSkills } from "./skills";
-import { configureMiddlewares } from "./middlewares";
+import { replyAsDefinedInDialogFlow } from "./skills";
 import * as http from "http";
+import { logMessage, dialogflowMiddleware } from './../common/middlewares';
+const webRepliesConverter = require('replies-converter-botkit-middlewares').web;
 
 @injectable()
 export class WebBotConfigurer {
@@ -19,8 +20,20 @@ export class WebBotConfigurer {
         this.httpServer = httpServer;
         this.controller.openSocketServer(this.httpServer);
         this.controller.startTicking();
-        configureSkills(this.controller);
-        configureMiddlewares(this.controller);
+        this.configureSkills();
+        this.configureMiddlewares();
+    }
+
+    private configureSkills() {
+        this.controller
+        .on('message_received', replyAsDefinedInDialogFlow);
+    }
+
+    private configureMiddlewares() {
+        this.controller.middleware.receive.use(logMessage.receive);
+        this.controller.middleware.receive.use(dialogflowMiddleware.receive);
+        this.controller.middleware.receive.use(webRepliesConverter.receive);
+        this.controller.middleware.send.use(logMessage.send);
     }
 
 }

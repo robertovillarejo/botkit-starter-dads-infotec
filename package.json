@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "test": "nyc --clean --all --require ts-node/register --require reflect-metadata/Reflect --extension .ts -- mocha --exit --timeout 5000",
-    "test:all": "npm test **/*.spec.ts"
+    "test:all": "npm test **/*.spec.ts",
+    "conversation-create": "node bots/conversation/create-conversation"
   },
   "dependencies": {
     "body-parser": "1.18.2",
@@ -23,6 +24,7 @@
     "ip": "1.1.5",
     "mongodb": "3.0.6",
     "morgan": "1.9.0",
+    "node-env-file": "^0.1.8",
     "pg": "7.4.1",
     "reflect-metadata": "0.1.12",
     "replies-converter-botkit-middlewares": "git+https://github.com/robertovillarejo/replies-converter-botkit-middlewares.git",

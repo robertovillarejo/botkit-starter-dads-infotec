@@ -1,5 +1,3 @@
-import { FacebookController } from 'botkit';
-
 const replyAsDefinedInDialogFlow = function (bot, message) {
     if (message['fbMessages']) {
         bot.startConversation(message, function (err, convo) {
@@ -10,8 +8,4 @@ const replyAsDefinedInDialogFlow = function (bot, message) {
     }
 };
 
-export function configureSkills(controller: FacebookController) {
-
-    controller.on('message_received,facebook_postback', replyAsDefinedInDialogFlow);
-
-}
+export { replyAsDefinedInDialogFlow };

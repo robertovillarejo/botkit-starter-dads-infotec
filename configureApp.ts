@@ -1,7 +1,7 @@
 import * as express from "express";
 import * as helmet from 'helmet';
 import * as path from "path";
-import { normalizePort } from './utils';
+import { normalizePort } from './utils/utils';
 
 
 const hbs = require('express-hbs');
@@ -19,6 +19,7 @@ export function configureApp(app: express.Application) {
     app.set('view engine', 'hbs');
     app.engine('hbs', hbs.express4({ partialsDir: __dirname + '/views/partials' }));
 
+    app.set('port', port);
     app.use(helmet());
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));

@@ -2,8 +2,9 @@ import { inject, injectable } from 'inversify';
 import TYPES from '../../constant/types';
 import * as express from 'express';
 import { FacebookController, FacebookBot } from 'botkit';
-import { configureSkills } from './skills';
-import { configureMiddlewares } from './middlewares';
+import { replyAsDefinedInDialogFlow } from "./skills";
+import { logMessage, dialogflowMiddleware } from './../common/middlewares';
+const fbRepliesConverter = require('replies-converter-botkit-middlewares').facebook;
 
 @injectable()
 export class FacebookBotConfigurer {
@@ -20,8 +21,23 @@ export class FacebookBotConfigurer {
         fbController.createWebhookEndpoints(app, this.bot, () => {
             console.log('Facebook bot online!');
         });
-        configureMiddlewares(this.controller);
-        configureSkills(this.controller);
+        this.configureMiddlewares();
+        this.configureSkills();
+    }
+
+    private configureSkills() {
+        this.controller
+        .on('message_received,facebook_postback', replyAsDefinedInDialogFlow);
+    }
+
+    private configureMiddlewares() {
+        //Receive
+        this.controller.middleware.receive.use(logMessage.receive);
+        this.controller.middleware.receive.use(dialogflowMiddleware.receive);
+        this.controller.middleware.receive.use(fbRepliesConverter.receive);
+
+        //Send
+        this.controller.middleware.send.use(logMessage.send);
     }
 
 }

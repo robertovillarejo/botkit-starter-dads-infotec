@@ -1,5 +1,3 @@
-import { WebController } from 'botkit';
-
 const replyAsDefinedInDialogFlow = (bot, message) => {
     if (message['webMessages']) {
         bot.startConversation(message, function (err, convo) {
@@ -10,8 +8,4 @@ const replyAsDefinedInDialogFlow = (bot, message) => {
     }
 };
 
-export function configureSkills(controller: WebController) {
-
-    controller.on('message_received', replyAsDefinedInDialogFlow);
-
-}
+export { replyAsDefinedInDialogFlow };

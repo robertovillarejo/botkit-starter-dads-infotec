@@ -14,5 +14,7 @@ container.get(TYPES.webBotConfigurer);
 container.get(TYPES.fbBotConfigurer);
 container.get(TYPES.FbController);
 
-console.log(`Server successfully started on http://localhost:${port}`);
-console.log(`Server successfully started on http://${externalIp}:${port}`);
+console.log(
+`Application is running! Access URLs:
+Local: http://localhost:${port}
+External: http://${externalIp}:${port}`);
