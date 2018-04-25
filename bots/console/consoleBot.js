@@ -146,7 +146,7 @@ controller.hears(['apagar'], 'message_received', function (bot, message) {
 
         convo.ask('Estás seguro de que quieres apagarme?', [
             {
-                pattern: bot.utterances.yes,
+                pattern: 'si',
                 callback: function (response, convo) {
                     convo.say('Adiós!');
                     convo.next();
@@ -156,7 +156,7 @@ controller.hears(['apagar'], 'message_received', function (bot, message) {
                 }
             },
             {
-                pattern: bot.utterances.no,
+                pattern: ['no'],
                 default: true,
                 callback: function (response, convo) {
                     convo.say('*Fiu!*');
@@ -171,11 +171,8 @@ controller.hears(['apagar'], 'message_received', function (bot, message) {
 controller.hears(['identificate', 'quien eres', 'cual es tu nombre'],
     'message_received', function (bot, message) {
 
-        var hostname = _hostname();
-        var uptime = formatUptime(process.uptime());
-
         bot.reply(message,
-            ':robot_face: Soy un ConsoleBot. He estado funcionando por ' + uptime + 'en ' + hostname + '.');
+            'Soy ConsoleBot.');
 
     });
 

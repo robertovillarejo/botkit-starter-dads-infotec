@@ -1,10 +1,11 @@
 {
-  "name": "inversify-express-example",
-  "version": "1.0.0",
-  "description": "Examples for using inversify with expressjs",
-  "author": "lholznagel",
+  "name": "botkit-starter-dads-infotec",
+  "version": "0.1.0",
+  "description": "Archetype for bots projects",
+  "author": "Roberto Villarejo Martínez",
   "license": "MIT",
   "scripts": {
+    "start": "nf start",
     "test": "nyc --clean --all --require ts-node/register --require reflect-metadata/Reflect --extension .ts -- mocha --exit --timeout 5000",
     "test:all": "npm test **/*.spec.ts",
     "conversation-create": "node bots/conversation/create-conversation"
@@ -16,6 +17,7 @@
     "cookie-parser": "1.4.3",
     "express": "4.16.2",
     "express-hbs": "1.0.4",
+    "foreman": "2.0.0",
     "helmet": "3.12.0",
     "inversify": "4.11.1",
     "inversify-binding-decorators": "3.2.0",
