@@ -3427,7 +3427,7 @@ repeating@^2.0.0:
 
 "replies-converter-botkit-middlewares@git+https://github.com/robertovillarejo/replies-converter-botkit-middlewares.git":
   version "1.0.0"
-  resolved "git+https://github.com/robertovillarejo/replies-converter-botkit-middlewares.git#b723b03acaae268f6d23a806d52dc29694175a57"
+  resolved "git+https://github.com/robertovillarejo/replies-converter-botkit-middlewares.git#e271051a5fffe811360fc30f3e7b05cd38e4fbcd"
   dependencies:
     debug "^3.1.0"
 
