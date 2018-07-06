@@ -4,11 +4,10 @@ import TYPES from "../../constant/types";
 import { replyAsDefinedInDialogFlow } from "./skills";
 import * as http from "http";
 import { logMessage, dialogflowMiddleware } from './../common/middlewares';
-import { BotConfigurer } from "../common/iBotConfigurer";
 const webRepliesConverter = require('replies-converter-botkit-middlewares').web;
 
 @injectable()
-export class WebBotConfigurer implements BotConfigurer {
+export class WebBotConfigurer {
 
     private controller: WebController;
     private httpServer: http.Server;
@@ -21,14 +20,16 @@ export class WebBotConfigurer implements BotConfigurer {
         this.httpServer = httpServer;
         this.controller.openSocketServer(this.httpServer);
         this.controller.startTicking();
+        this.configureSkills();
+        this.configureMiddlewares();
     }
 
-    configureSkills() {
+    private configureSkills() {
         this.controller
-            .on('message_received', replyAsDefinedInDialogFlow);
+        .on('message_received', replyAsDefinedInDialogFlow);
     }
 
-    configureMiddlewares() {
+    private configureMiddlewares() {
         this.controller.middleware.receive.use(logMessage.receive);
         this.controller.middleware.receive.use(dialogflowMiddleware.receive);
         this.controller.middleware.receive.use(webRepliesConverter.receive);

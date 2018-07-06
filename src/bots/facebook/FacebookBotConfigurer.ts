@@ -4,11 +4,10 @@ import * as express from 'express';
 import { FacebookController, FacebookBot } from 'botkit';
 import { replyAsDefinedInDialogFlow } from "./skills";
 import { logMessage, dialogflowMiddleware } from './../common/middlewares';
-import { BotConfigurer } from '../common/iBotConfigurer';
 const fbRepliesConverter = require('replies-converter-botkit-middlewares').facebook;
 
 @injectable()
-export class FacebookBotConfigurer implements BotConfigurer {
+export class FacebookBotConfigurer {
 
     private controller: FacebookController;
     private bot: FacebookBot;
@@ -22,14 +21,16 @@ export class FacebookBotConfigurer implements BotConfigurer {
         fbController.createWebhookEndpoints(app, this.bot, () => {
             console.log('Facebook bot online!');
         });
+        this.configureMiddlewares();
+        this.configureSkills();
     }
 
-    configureSkills() {
+    private configureSkills() {
         this.controller
-            .on('message_received,facebook_postback', replyAsDefinedInDialogFlow);
+        .on('message_received,facebook_postback', replyAsDefinedInDialogFlow);
     }
 
-    configureMiddlewares() {
+    private configureMiddlewares() {
         //Receive
         this.controller.middleware.receive.use(logMessage.receive);
         this.controller.middleware.receive.use(dialogflowMiddleware.receive);

@@ -7,8 +7,7 @@ const TYPES = {
     ChuckNorrisJokeService: Symbol.for('ChuckNorrisJokeService'),
     httpServer: Symbol.for("httpServer"),
     webBotConfigurer: Symbol.for("WebControllerConfigurer"),
-    fbBotConfigurer: Symbol.for("FacebookControllerConfigurer"),
-    BotConfigurer: Symbol.for("BotConfigurer")
+    fbBotConfigurer: Symbol.for("FacebookControllerConfigurer")
 };
 
 export default TYPES;
