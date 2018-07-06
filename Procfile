@@ -1,1 +1,1 @@
-worker: yarn start
+web: npm start
