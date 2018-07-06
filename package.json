@@ -5,7 +5,8 @@
   "author": "Roberto Villarejo Martínez",
   "license": "MIT",
   "scripts": {
-    "start": "nf start",
+    "start": "node lib/bootstrap.js",
+    "start:dev": "nf start",
     "copy-resources": "cp -rdf src/public lib/public && cp -rdf src/views lib/views",
     "build": "tsc -p . && yarn run copy-resources",
     "postinstall": "yarn run build",
