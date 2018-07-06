@@ -18,10 +18,6 @@ For DialogFlow support:
 - The client access token
 - The developer access token
 
-For fulfillment support:
-- The endpoint of the external system (host and port)
-- The credentials
-
 ## Usage
 Fist, make sure you're done with all environment variables in your `.env` file.
 
@@ -30,11 +26,10 @@ Fist, make sure you're done with all environment variables in your `.env` file.
 - **ACCESS_TOKEN**: The Facebook page access token (this token is provided by Facebook)
 - **VERIFY_TOKEN**: The Facebook verify token (this token is defined by the user)
 - **PORT**: The port that this application will use
-- **FULFILLMENT_ENDPOINT**: The URL that this application will use as webhook
 
-Once all variables defined, run `npm install` and dependencies will be downloaded.
+Once all variables defined, run `yarn install` and dependencies will be downloaded.
 
-Finally, to run the project simply execute `npm start` or `node index.js`.
+Finally, to run the project simply execute `yarn start:dev`
 
 ### Creating Conversation
 
