@@ -1,5 +1,3 @@
-import { FacebookBotConfigurer } from './bots/facebook/FacebookBotConfigurer';
-import { WebBotConfigurer } from './bots/web/WebBotConfigurer';
 import 'reflect-metadata';
 import * as http from "http";
 import { InversifyExpressServer } from 'inversify-express-utils';
@@ -17,6 +15,7 @@ import * as botkit from "botkit";
 import './controller/fulfillment';
 import './bots/web/WebBotConfigurer';
 import './bots/facebook/FacebookBotConfigurer'
+import { BotConfigurer } from './bots/common/iBotConfigurer';
 
 const port = process.env.PORT;
 
@@ -44,7 +43,6 @@ container.bind<http.Server>(TYPES.httpServer).toConstantValue(httpServer);
 //SocketBot
 let webController = botkit.socketbot({ replyWithTyping: true });
 container.bind<WebController>(TYPES.WebController).toConstantValue(webController);
-container.bind(TYPES.webBotConfigurer).to(WebBotConfigurer);
 
 //FacebookBot
 let fbController = botkit.facebookbot({
@@ -52,6 +50,8 @@ let fbController = botkit.facebookbot({
   verify_token: process.env.VERIFY_TOKEN
 });
 container.bind<FacebookController>(TYPES.FbController).toConstantValue(fbController);
-container.bind(TYPES.fbBotConfigurer).to(FacebookBotConfigurer);
+
+//BotConfigurer
+container.bind<BotConfigurer>(TYPES.BotConfigurer);
 
 export default container;
