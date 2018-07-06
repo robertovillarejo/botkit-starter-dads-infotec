@@ -44,3 +44,6 @@ typings
 temp
 
 package-lock.json
+
+## Ignore lib directory
+lib

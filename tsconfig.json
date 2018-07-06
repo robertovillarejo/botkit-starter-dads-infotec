@@ -6,8 +6,11 @@
             "es6",
             "dom"
         ],
+        "rootDir": "src",
+        "outDir": "lib",
         "noImplicitAny": false,
-        "sourceMap": false,
+        "sourceMap": true,
+        "declaration": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "moduleResolution": "node",
@@ -15,6 +18,9 @@
     },
     "compileOnSave": false,
     "exclude": [
-      "node_modules"
+        "node_modules"
+    ],
+    "include": [
+        "src"
     ]
 }

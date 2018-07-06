@@ -6,9 +6,11 @@
   "license": "MIT",
   "scripts": {
     "start": "nf start",
+    "copy-resources": "cp -rdf src/public lib/public && cp -rdf src/views lib/views",
+    "build": "tsc -p . && yarn run copy-resources",
     "test": "nyc --clean --all --require ts-node/register --require reflect-metadata/Reflect --extension .ts -- mocha --exit --timeout 5000",
     "test:all": "npm test **/*.spec.ts",
-    "conversation-create": "node bots/conversation/create-conversation"
+    "conversation-create": "node src/bots/conversation/create-conversation"
   },
   "dependencies": {
     "body-parser": "1.18.2",

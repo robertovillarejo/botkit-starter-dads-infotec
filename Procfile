@@ -1,1 +1,1 @@
-web: ts-node bootstrap.ts
+web: node lib/bootstrap.js
