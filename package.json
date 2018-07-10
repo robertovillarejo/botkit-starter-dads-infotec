@@ -9,7 +9,7 @@
     "start:dev": "nf start",
     "clean": "rm -rdf lib",
     "copy-resources": "cp -rdf src/public lib/public && cp -rdf src/views lib/views",
-    "build": "tsc -p . && yarn run copy-resources",
+    "build": "yarn clean && tsc -p . && yarn run copy-resources",
     "postinstall": "yarn run build",
     "test": "nyc --clean --all --require ts-node/register --require reflect-metadata/Reflect --extension .ts -- mocha --exit --timeout 5000",
     "test:all": "npm test **/*.spec.ts",

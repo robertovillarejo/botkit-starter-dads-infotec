@@ -18,7 +18,7 @@ For DialogFlow support:
 - The client access token
 - The developer access token
 
-## Usage
+## Development
 Fist, make sure you're done with all environment variables in your `.env` file.
 
 - **DIALOGFLOW_CLIENT_TOKEN**: The DialogFlow client token
@@ -29,9 +29,77 @@ Fist, make sure you're done with all environment variables in your `.env` file.
 
 Once all variables defined, run `yarn install` and dependencies will be downloaded.
 
-Finally, to run the project simply execute `yarn start:dev`
+Run `yarn build` to clean `lib` folder, copy resources and tanspile to Javascript.  
 
-### Creating Conversation
+Run `yarn start:dev` to start the project in development mode.
+
+### Project Structure
+```
+├── package.json
+├── Procfile    (Processes file used by Heroku in production/used by foreman in development)
+├── README.md
+├── src
+│   ├── bootstrap.ts    (Resources initialization through IoC container)
+│   ├── bots
+│   │   ├── common
+│   │   │   └── middlewares.ts
+│   │   ├── console
+│   │   │   └── consoleBot.js
+│   │   ├── conversation
+│   │   │   ├── create-conversation.js
+│   │   │   └── starter-conversation.json
+│   │   ├── facebook
+│   │   │   ├── FacebookBotConfigurer.ts
+│   │   │   ├── menuConfigurer.ts
+│   │   │   └── skills.ts
+│   │   └── web //Web bot
+│   │       ├── skills.ts
+│   │       └── WebBotConfigurer.ts (Configure skills and middlewares)
+│   ├── configureApp.ts (Configure Express Application Web server)
+│   ├── constant
+│   │   └── types.ts
+│   ├── controller
+│   │   └── fulfillment.ts  (REST endpoint to do fulfillment called by Dialogflow)
+│   ├── installer.ts    (IoC container creation and binding to components)
+│   ├── public
+│   │   ├── chat.html
+│   │   ├── css
+│   │   │   ├── biggerstyles.css
+│   │   │   ├── embed.css
+│   │   │   ├── embed.css.map
+│   │   │   ├── styles.css
+│   │   │   └── styles.css.map
+│   │   ├── images
+│   │   │   └── botkit_icon.png
+│   │   ├── javascripts
+│   │   │   ├── beep.mp3
+│   │   │   ├── client.js
+│   │   │   ├── embed.js
+│   │   │   └── sent.mp3
+│   │   └── sass
+│   │       ├── _botkit.scss
+│   │       ├── _chat.scss
+│   │       ├── embed.scss
+│   │       ├── _home.scss
+│   │       └── styles.scss
+│   ├── service (Example service for fulfillment)
+│   │   ├── chuckNorrisJokeService.ts
+│   │   └── jokeService.ts
+│   ├── utils
+│   │   └── utils.ts
+│   └── views
+│       ├── embed.hbs
+│       ├── index.hbs
+│       ├── layouts
+│       │   └── default.hbs
+│       └── partials
+│           ├── footer.hbs
+│           ├── header.hbs
+│           └── head.hbs
+├── tsconfig.json
+```
+
+## Creating Conversation
 
 If you want to create a basic conversation for your DialogFlow agent, run `npm run conversation-create` (currently supports only Spanish).
 After that, your chatbot will be able to recognize the following intents:
@@ -48,7 +116,19 @@ After that, your chatbot will be able to recognize the following intents:
 - Feedback (Eres de gran ayuda/No sirves para nada)
 - Location of the company (¿En dónde se ubican?)
 
-### Chatting with the chatbot
+## Chatting with the chatbot in Web
+Once your project is running, go to `http://localhost:3000` (or the port you chose) and start chatting!
+
+## Chatting with the chatbot in Facebook
 Once your project is running, make sure your ip is public. Then, in your Facebook App, add a webhook with that ip and the verify token you defined in the `.env` file.
 
 Go to your Facebook page and send a message to start the conversation.
+
+## Deploy to Heroku
+Requirements: 
+- [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+
+1. Login to heroku `heroku login`
+2. Create a Heroku app `heroku create APP_NAME`
+3. Push branch `master` to heroku remote: `git push heroku master`
+4. Set environment variables: `heroku config:set NAME=VALUE`. To see your stored variables simply run `heroku config`
